@@ -19,6 +19,13 @@ import ManageItems from '../Pages/Dashboard/ManageItems/ManageItems';
 import UpdateItem from '../Pages/Dashboard/Update/UpdateItem';
 import StripePayment from '../Pages/Payment/StripePayment';
 import StripePayment2 from '../Pages/Payment/StripePayment2';
+import PaymentHistory from '../Pages/Dashboard/PaymentHistory/PaymentHistory';
+import UserHome from '../Pages/Dashboard/UserHome/UserHome';
+import StripePayment3 from '../Pages/Payment/StripePayment3';
+import Payment from '../Pages/Payment/Payment';
+import PaymentSuccess from '../Pages/PaymentSuccess/PaymentSuccess';
+import PaymentFailed from '../Pages/PaymentFailed/PaymentFailed';
+// import StripePayment3 from '../Pages/Payment/StripePayment3';
 
 const router = createBrowserRouter([
     {
@@ -54,9 +61,14 @@ const router = createBrowserRouter([
                 element: <PhotoUpload></PhotoUpload>
             },
             {
-                path: 'secret',
+                path: 'userSecret',
                 element: <PrivateRout> <Secret></Secret> </PrivateRout>
-            }
+            },
+            {
+                path: 'adminSecret',
+                element: <PrivateRout> <Secret></Secret> </PrivateRout>
+            },
+            
         ]
     },
     {
@@ -64,14 +76,31 @@ const router = createBrowserRouter([
         element:<PrivateRout> <DashboardLayout></DashboardLayout></PrivateRout>,
         children: [
             {
+                path: 'userHome',
+                element: <UserHome></UserHome>
+            },
+            {
                 path: 'cart',
                 element: <Cart></Cart>
             },
             {
                 path: 'payment',
-                element: <StripePayment></StripePayment>
+                element: <Payment></Payment>
+            },
+            {
+                path: 'paymentHistory',
+                element: <PaymentHistory></PaymentHistory>
+            },
+            {
+                path: 'paymentSuccess',
+                element: <PaymentSuccess></PaymentSuccess>
+            },
+            {
+                path: 'paymentFailed',
+                element: <PaymentFailed></PaymentFailed>
             },
             // addmin routes
+           
             {
                 path: 'adminHome',
                 element: <AdminRoute><AdminHome></AdminHome></AdminRoute>
@@ -91,7 +120,7 @@ const router = createBrowserRouter([
             {
                 path: 'updateItem/:id',
                 element: <AdminRoute> <UpdateItem></UpdateItem> </AdminRoute>,
-                loader: ({params})=> fetch(`http://localhost:5000/menu/${params.id}`)
+                loader: ({params})=> fetch(`https://bristo-boss-server-ten.vercel.app/menu/${params.id}`)
             }
         ]
         

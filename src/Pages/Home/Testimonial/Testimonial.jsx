@@ -14,7 +14,7 @@ import { FaQuoteLeft } from "react-icons/fa6";
 const Testimonial = () => {
   const [reviews, setReviews] = useState([]);
   useEffect(() => {
-    axios.get("http://localhost:5000/reviews").then((res) => setReviews(res.data));
+    axios.get("https://bristo-boss-server-ten.vercel.app/reviews").then((res) => setReviews(res.data));
   }, []);
   return (
     <section className="my-20">

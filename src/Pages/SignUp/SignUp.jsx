@@ -65,49 +65,49 @@ const SignUp = () => {
     const email = form.email.value;
     const password = form.password.value;
     const captcha = form.captcha.value;
+    createUser(email, password)
+    .then((res) => {
+      const loggedUser = res.user;
+      updateUser(name).then((res) => {
+        const userInfo = {
+          name: name,
+          email: email
+        };
+
+        axiosPublic.post("/users", userInfo).then((res) => {
+          if (res.data.insertedId) {
+            Swal.fire({
+              position: "top-end",
+              icon: "success",
+              title: "Your work has been saved",
+              showConfirmButton: false,
+              timer: 1500,
+            });
+          }
+        });
+      });
+      navigate("/");
+      console.log(res);
+    })
+    .catch((err) => console.log(err));
     // reset()
     const imageData = {
       image: photo,
     };
     // console.log(imageData);
-    axiosPublic
-      .post(imageHostingApi, imageData, {
-        headers: { "content-type": "multipart/form-data" },
-      })
-      .then((res) => {
-        if (res.data.data.url) {
-          const photoUrl = res.data.data.url
-          // setPhotoUrl(res.data.data.url);
-          createUser(email, password)
-            .then((res) => {
-              const loggedUser = res.user;
-              updateUser(name, photoUrl).then((res) => {
-                const userInfo = {
-                  name: name,
-                  email: email,
-                  photo: photoUrl
-                };
-
-                axiosPublic.post("/users", userInfo).then((res) => {
-                  if (res.data.insertedId) {
-                    Swal.fire({
-                      position: "top-end",
-                      icon: "success",
-                      title: "Your work has been saved",
-                      showConfirmButton: false,
-                      timer: 1500,
-                    });
-                  }
-                });
-              });
-              navigate("/");
-              console.log(res);
-            })
-            .catch((err) => console.log(err));
-        } else {
-          // setPhotoUrl(null);
-        }
-      });
+    // axiosPublic
+    //   .post(imageHostingApi, imageData, {
+    //     headers: { "content-type": "multipart/form-data" },
+    //   })
+    //   .then((res) => {
+    //     if (res.data.data.url) {
+    //       const photoUrl = res.data.data.url
+    //       // setPhotoUrl(res.data.data.url);
+         
+    //     } else {
+    //       // setPhotoUrl(null);
+    //     }
+    //   });
     // console.log(photoUrl);
 
     //  console.log(e.target.photo );

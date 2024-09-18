@@ -11,9 +11,11 @@ import { Link } from "react-router-dom";
 const Cart = () => {
   const [cart, refetch, isLoading] = useCart();
   const axiosSecure = useAxiosSecure();
+  
+  const totalPrice = (cart?.reduce((sum, item) => sum + item.price, 0))
+  // const newTotalPrice = totalPrice.toFixed(2)
+  const amount = Math.round(totalPrice * 100) /100
   console.log(cart);
-
-  const totalPrice = cart?.reduce((sum, item) => sum + item.price, 0);
 
   const handleDelete = (id) => {
     Swal.fire({
@@ -55,10 +57,10 @@ const Cart = () => {
             Total Orders: {cart?.length}{" "}
           </h2>
           <h2 className="text-2xl font-bold uppercase">
-            Total Price: ${totalPrice}{" "}
+            Total Price: ${amount}{" "}
           </h2>
           {
-            cart?.length > 0 ? <Link to='/dashboard/payment'>
+            cart?.length > 0 ? <Link state={amount} to='/dashboard/payment'>
             <button className="btn bg-orange-300 border-none text-white">
               Pay
             </button>

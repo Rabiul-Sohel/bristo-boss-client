@@ -3,10 +3,13 @@ import useAuth from "../../../hooks/useAuth";
 import Swal from "sweetalert2";
 import { FaShoppingCart } from "react-icons/fa";
 import useCart from "../../../hooks/useCart";
+import useAdmin from "../../../hooks/useAdmin";
 
 const NavBar = () => {
   const { user, signOutUser } = useAuth();
+  const [isAdmin] = useAdmin()
   const [cart] = useCart();
+  console.log(isAdmin?.admin);
   const handleLogout = () => {
     signOutUser()
       .then(() => {
@@ -31,21 +34,32 @@ const NavBar = () => {
       <li>
         <NavLink to="/shop/salad">Our Shop</NavLink>
       </li>
-      <li>
-        <NavLink to="/secret">Secret</NavLink>
-      </li>
-     
-        <li>
-          <NavLink to='/dashboard/cart' className="btn">
-            <FaShoppingCart />
-            <div className="badge badge-secondary">
-              {
-                cart? cart?.length : 0
-              }
-            </div>
-          </NavLink>
+      {
+        // user ? 'true' : 'false'
+        // user ? condition ? 'double true' : 'one true' : 'false'
+      }
+      {
+        user && isAdmin?.admin && <li>
+          <NavLink to="/adminSecret">Admin Secret</NavLink>
         </li>
-      
+      }
+      {
+          user && !isAdmin?.admin && <li>
+          <NavLink to="/userSecret">User Secret</NavLink>
+        </li>
+      }
+
+      <li>
+        <NavLink to='/dashboard/cart' className="btn">
+          <FaShoppingCart />
+          <div className="badge badge-secondary">
+            {
+              cart ? cart?.length : 0
+            }
+          </div>
+        </NavLink>
+      </li>
+
     </>
   );
   return (
@@ -93,7 +107,7 @@ const NavBar = () => {
                   <img
                     alt="Tailwind CSS Navbar component"
                     src={
-                      user.photoURL ? user.photoURL :"https://img.daisyui.com/images/stock/photo-1534528741775-53994a69daeb.jpg"
+                      user.photoURL ? user.photoURL : "https://img.daisyui.com/images/stock/photo-1534528741775-53994a69daeb.jpg"
                     }
                   />
                 </div>

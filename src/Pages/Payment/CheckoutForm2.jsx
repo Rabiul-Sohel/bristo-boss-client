@@ -7,7 +7,7 @@ const CheckoutForm2 = ({clientSecret}) => {
     const elements = useElements()
     const [error, setError] = useState('')
     const {user} = useAuth()
-    // console.log();
+    console.log(clientSecret);
     
     const handleSubmit = async(event) =>{
         event.preventDefault()

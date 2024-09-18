@@ -2,7 +2,7 @@ import { loadStripe } from "@stripe/stripe-js";
 import CheckoutForm from "./CheckoutForm";
 import { Elements } from "@stripe/react-stripe-js";
 import CheckoutForm2 from "./CheckoutForm2";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { useQuery } from "@tanstack/react-query";
 import useAxiosPublic from "../../hooks/useAxiosPublic";
 import useCart from "../../hooks/useCart";
@@ -11,10 +11,15 @@ const stripePromise = loadStripe('pk_test_51PWpysKLk0U02GmcZ4c2QHEhiEFhrOk32YxBm
 const StripePayment2 = () => {
     const axiosPublic = useAxiosPublic()
     const [cart] = useCart()
+    // const [clientSecret, setClientSecret] = useState('')
     // console.log(cart);
     const totalPrice = cart?.reduce((sum, item)=> sum + item.price, 0)
+    // useEffect(()=>{
+    //     axiosPublic.post('/create-payment-intent', {totalPrice})
+    //     .then(res =>setClientSecret(res.data.clientSecret))
+    // },[])
     // console.log(totalPrice);
-    // const [clientSecret, setClientSecret] = useState('')
+   
     const {data:clientSecret}= useQuery({
        queryKey: ['clientSecret'],
        queryFn: async()=>{

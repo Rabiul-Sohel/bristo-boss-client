@@ -16,12 +16,14 @@ import {
 import { FaCartShopping, FaShop } from "react-icons/fa6";
 import { NavLink, Outlet } from "react-router-dom";
 import useAdmin from "../hooks/useAdmin";
+import useCart from "../hooks/useCart";
 
 const DashboardLayout = () => {
   // const isAdmin = true;
   const [isAdmin] = useAdmin()
   const admin = isAdmin?.admin
-  console.log(admin);
+  const [cart=0] = useCart()
+  // console.log(admin);
  
 
   return (
@@ -80,7 +82,7 @@ const DashboardLayout = () => {
             </li>
             <li>
               {" "}
-              <NavLink to="/dashboard/reservation">
+              <NavLink to="/dashboard/payment">
                 {" "}
                 <FaCalendar></FaCalendar> Reservation{" "}
               </NavLink>{" "}
@@ -96,7 +98,7 @@ const DashboardLayout = () => {
               {" "}
               <NavLink to="/dashboard/cart">
                 {" "}
-                <FaCartShopping></FaCartShopping> My Cart{" "}
+                <FaCartShopping></FaCartShopping> {`My Cart (${cart?.length})`}  {" "}
               </NavLink>{" "}
             </li>
             <li>

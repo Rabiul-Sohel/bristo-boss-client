@@ -2,9 +2,11 @@ import { useQuery } from "@tanstack/react-query";
 import useAuth from "./useAuth";
 import useAxiosSecure from "./useAxiosSecure";
 import { data } from "autoprefixer";
+import useAxiosPublic from "./useAxiosPublic";
 
 const useCart = () => {
-  const axiosSecure = useAxiosSecure();
+  // const axiosSecure = useAxiosSecure();
+  const axiosPublic = useAxiosPublic()
   
   const { user } = useAuth();
   console.log(user);
@@ -17,7 +19,7 @@ const useCart = () => {
   } = useQuery({
     queryKey: ["cart"],
     queryFn: async () => {
-      const res = await axiosSecure.get(`/carts?email=${user?.email}`)
+      const res = await axiosPublic.get(`/carts?email=${user?.email}`)
       return res.data;
     },
   });

@@ -4,9 +4,9 @@ import useAuth from "./useAuth";
 const useAxiosSecure = () => {
   // const { signOutUser } = useAuth();
   const axiosSecure = axios.create({
-    baseURL: "http://localhost:5000",
-    // withCredentials: true,
-    headers: { token: localStorage.getItem("access-token") },
+    baseURL: "https://bristo-boss-server-ten.vercel.app",
+    withCredentials: true,
+    // headers: { token: localStorage.getItem("access-token") },
   });
 
   axiosSecure.interceptors.request.use(
