@@ -11,10 +11,12 @@ const PaymentButton = ({ amount }) => {
             email: user?.email,
             products: cart.length,
             price: amount,
-            ids: cart.map(singleCart => singleCart._id),
-            cartIds: cart.map(singleProduct => singleProduct.cartId),
+            cartIds: cart.map(singleCart => singleCart._id),
+            menuIds: cart.map(singleProduct => singleProduct.menuId),
             // transactionId: paymentIntent.id,
-            status: 'Pending'
+            paymentStatus: 'Pending',
+            deliveryStatus: 'Pending'
+
         }
         const response = await axiosSecure.post('/payment-initiate', payment)
         if(response.data.url){

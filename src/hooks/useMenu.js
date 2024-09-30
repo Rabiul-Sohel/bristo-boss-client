@@ -10,13 +10,13 @@ const useMenu = () => {
   const {data:items=[], isPending, refetch} = useQuery({
     queryKey: ['menu'],
     queryFn: async()=>{
-      const res = await axios.get('https://bristo-boss-server-ten.vercel.app/menu')
+      const res = await axios.get('http://localhost:5000/menu')
       return res.data
     }
   })
   // console.log(items);
   // useEffect(() => {
-  //   axios.get("https://bristo-boss-server-ten.vercel.app/menu").then((res) => {
+  //   axios.get("http://localhost:5000/menu").then((res) => {
   //     setMenu(res.data);
   //     setLoading(false);
   //   });

@@ -2,7 +2,8 @@ import { useQuery } from "@tanstack/react-query";
 import useAuth from "../../../hooks/useAuth";
 import useAxiosSecure from "../../../hooks/useAxiosSecure";
 import { FaDollarSign, FaUsers } from "react-icons/fa";
-import { BarChart, Bar, Cell, XAxis, YAxis, CartesianGrid, PieChart, Pie,  Legend } from 'recharts';
+// import bkash from '@api/bkash';
+import { BarChart, Bar, Cell, XAxis, YAxis, CartesianGrid, PieChart, Pie, Legend } from 'recharts';
 const colors = ['#0088FE', '#00C49F', '#FFBB28', '#FF8042', 'red', 'pink'];
 const COLORS = ['#0088FE', '#00C49F', '#FFBB28', '#FF8042'];
 
@@ -17,6 +18,7 @@ const AdminHome = () => {
       return res.data;
     }
   })
+  console.log(stats);
   const { data: chartData = [] } = useQuery({
     queryKey: ['order-stats'],
     queryFn: async () => {
@@ -50,15 +52,21 @@ const AdminHome = () => {
       </text>
     );
   };
-  const pieChartData = chartData.map(data =>{
-    return {name: data.category, value: data.revenue}
+  const pieChartData = chartData.map(data => {
+    return { name: data.category, value: data.revenue }
   })
-  
+  const handleSendingMail = async () => {
+
+   
+    const response = await axiosSecure.post('/mailgun', {email: user.email})
+    console.log(response.data);
+  }
+
 
   return (
-    <div>
+    <div className="py-5 px-10">
       <h2 className="text-3xl">
-        <span>Hi, Welcome</span>
+        <span>Hi, Welcome </span>
         {
           user?.displayName ? user?.displayName : 'Back'
         }
@@ -145,25 +153,28 @@ const AdminHome = () => {
 
         </div>
         <div className="1/2">
-        <PieChart width={400} height={400}>
-          <Pie
-            data={pieChartData}
-            cx="50%"
-            cy="50%"
-            labelLine={false}
-            label={renderCustomizedLabel}
-            outerRadius={80}
-            fill="#8884d8"
-            dataKey="value"
-          >
-            {pieChartData.map((entry, index) => (
-              <Cell key={`cell-${index}`} fill={COLORS[index % COLORS.length]} />
-            ))}
-          </Pie>
-          <Legend></Legend>
-        </PieChart>
-     
+          <PieChart width={400} height={400}>
+            <Pie
+              data={pieChartData}
+              cx="50%"
+              cy="50%"
+              labelLine={false}
+              label={renderCustomizedLabel}
+              outerRadius={80}
+              fill="#8884d8"
+              dataKey="value"
+            >
+              {pieChartData.map((entry, index) => (
+                <Cell key={`cell-${index}`} fill={COLORS[index % COLORS.length]} />
+              ))}
+            </Pie>
+            <Legend></Legend>
+          </PieChart>
+
         </div>
+      </div>
+      <div>
+        <button className="btn" onClick={handleSendingMail}>Send Email</button>
       </div>
     </div>
   );

@@ -46,12 +46,12 @@ const Cart = () => {
     return <div className="text-5xl">Loading</div>;
   }
   return (
-    <div>
+    <div className="px-20 py-1 bg-[#F6F6F6] ">
       <SectionTitle
         heading={"Wanna Add More?"}
         subHeading={"My Cart"}
       ></SectionTitle>
-      <div className="bg-white p-10">
+      <div className="bg-base-100 p-10 mb-10  ">
         <div className="flex justify-between items-center">
           <h2 className="text-2xl font-bold uppercase">
             Total Orders: {cart?.length}{" "}
@@ -70,15 +70,15 @@ const Cart = () => {
           }
         </div>
         <div className="overflow-x-auto">
-          <table className="table mt-5">
+          <table className="table mt-5 ">
             {/* head */}
-            <thead className="bg-orange-300   text-black rounded-t-xl">
-              <tr>
-                <th></th>
-                <th>Item Image</th>
-                <th>Item Name</th>
-                <th>Price</th>
-                <th>Action</th>
+            <thead className="   text-black ">
+              <tr className="">
+                <th className="rounded-tl-md bg-orange-300"></th>
+                <th className="bg-orange-300">Item Image</th>
+                <th className="bg-orange-300">Item Name</th>
+                <th className="bg-orange-300">Price</th>
+                <th className="rounded-tr-md bg-orange-300">Action</th>
               </tr>
             </thead>
             <tbody>

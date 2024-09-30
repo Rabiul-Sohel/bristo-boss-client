@@ -25,6 +25,11 @@ import StripePayment3 from '../Pages/Payment/StripePayment3';
 import Payment from '../Pages/Payment/Payment';
 import PaymentSuccess from '../Pages/PaymentSuccess/PaymentSuccess';
 import PaymentFailed from '../Pages/PaymentFailed/PaymentFailed';
+import ContactUs from '../Pages/Contact/ContactUs';
+import AddReview from '../Pages/Dashboard/AddReview/AddReview';
+import Reservation from '../Pages/Dashboard/Reservation/Reservation';
+import MyBooking from '../Pages/Dashboard/MyBooking/MyBooking';
+import AllPayments from '../Pages/Dashboard/AllPayments/AllPayments';
 // import StripePayment3 from '../Pages/Payment/StripePayment3';
 
 const router = createBrowserRouter([
@@ -68,6 +73,11 @@ const router = createBrowserRouter([
                 path: 'adminSecret',
                 element: <PrivateRout> <Secret></Secret> </PrivateRout>
             },
+            {
+                path: 'contact',
+                element: <ContactUs></ContactUs>
+            },
+           
             
         ]
     },
@@ -92,18 +102,35 @@ const router = createBrowserRouter([
                 element: <PaymentHistory></PaymentHistory>
             },
             {
-                path: 'paymentSuccess',
+                path: 'success',
                 element: <PaymentSuccess></PaymentSuccess>
             },
             {
-                path: 'paymentFailed',
+                path: 'error',
                 element: <PaymentFailed></PaymentFailed>
+            },
+            
+            {
+                path: 'addReview',
+                element: <AddReview></AddReview>
+            },
+            {
+                path: 'reservation',
+                element: <Reservation></Reservation>
+            },
+            {
+                path: 'userBooking',
+                element: <MyBooking></MyBooking>
             },
             // addmin routes
            
             {
                 path: 'adminHome',
                 element: <AdminRoute><AdminHome></AdminHome></AdminRoute>
+            },
+            {
+                path: 'allPayments',
+                element: <AdminRoute><AllPayments></AllPayments></AdminRoute>
             },
             {
                 path: 'allUsers',
@@ -120,7 +147,7 @@ const router = createBrowserRouter([
             {
                 path: 'updateItem/:id',
                 element: <AdminRoute> <UpdateItem></UpdateItem> </AdminRoute>,
-                loader: ({params})=> fetch(`https://bristo-boss-server-ten.vercel.app/menu/${params.id}`)
+                loader: ({params})=> fetch(`http://localhost:5000/menu/${params.id}`)
             }
         ]
         

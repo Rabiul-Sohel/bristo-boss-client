@@ -22,126 +22,208 @@ const DashboardLayout = () => {
   // const isAdmin = true;
   const [isAdmin] = useAdmin()
   const admin = isAdmin?.admin
-  const [cart=0] = useCart()
+  const [cart = 0] = useCart()
   // console.log(admin);
- 
+
 
   return (
     <div className="max-w-7xl mx-auto flex ">
-      <div className="menu bg-orange-300 text-black min-h-screen w-1/6">
+      <div className="menu bg-orange-300 text-black min-h-screen w-1/6 font-serif">
         <div className="flex flex-col items-center my-5">
           <h2 className="text-xl font-bold uppercase">Bistro Boss</h2>
           <p className="tracking-[4px] uppercase font-semibold">Restaurant</p>
         </div>
         {admin ? (
-          <div >
+          <div className="uppercase" >
             <li>
               {" "}
-              <NavLink to="/dashboard/adminHome">
+              <NavLink className='hover:text-white' style={({ isActive }) => {
+                return {
+                  color: isActive ? "white" : '',
+                  background: 'none'
+                }
+              }} to="/dashboard/adminHome">
                 {" "}
                 <FaHome></FaHome> Admin Home{" "}
               </NavLink>{" "}
             </li>
             <li>
               {" "}
-              <NavLink to="/dashboard/addItems">
+              <NavLink className='hover:text-white' style={({ isActive }) => {
+                return {
+                  color: isActive ? "white" : '',
+                  background: 'none'
+                }
+              }} to="/dashboard/addItems">
                 {" "}
                 <FaUtensils></FaUtensils> Add Items{" "}
               </NavLink>{" "}
             </li>
             <li>
               {" "}
-              <NavLink to="/dashboard/manageItems">
+              <NavLink className='hover:text-white' style={({ isActive }) => {
+                return {
+                  color: isActive ? "white" : '',
+                  background: 'none'
+                }
+              }} to="/dashboard/manageItems">
                 {" "}
-                <FaList></FaList> Manage Items{" "} 
+                <FaList></FaList> Manage Items{" "}
               </NavLink>{" "}
             </li>
             <li>
               {" "}
-              <NavLink to="/dashboard/manageBookings">
+              <NavLink className='hover:text-white' style={({ isActive }) => {
+                return {
+                  color: isActive ? "white" : '',
+                  background: 'none'
+                }
+              }} to="/dashboard/manageBookings">
                 {" "}
                 <FaBook></FaBook> Manage Bookings{" "}
               </NavLink>{" "}
             </li>
             <li>
               {" "}
-              <NavLink to="/dashboard/allUsers">
+              <NavLink className='hover:text-white' style={({ isActive }) => {
+                return {
+                  color: isActive ? "white" : '',
+                  background: 'none'
+                }
+              }} to="/dashboard/allPayments">
+                {" "}
+                <FaUsers></FaUsers> All Payments{" "}
+              </NavLink>{" "}
+            </li>
+            <li>
+              {" "}
+              <NavLink className='hover:text-white' style={({ isActive }) => {
+                return {
+                  color: isActive ? "white" : '',
+                  background: 'none'
+                }
+              }} to="/dashboard/allUsers">
                 {" "}
                 <FaUsers></FaUsers> All Users{" "}
               </NavLink>{" "}
             </li>
           </div>
         ) : (
-          <>
+          <div className="uppercase">
             <li>
               {" "}
-              <NavLink to="/dashboard/userHome">
+              <NavLink className='hover:text-white' style={({ isActive }) => {
+                return {
+                  color: isActive ? "white" : '',
+                  background: 'none'
+                }
+              }} to="/dashboard/userHome">
                 {" "}
                 <FaHome></FaHome> User Home{" "}
               </NavLink>{" "}
             </li>
             <li>
               {" "}
-              <NavLink to="/dashboard/payment">
+              <NavLink className='hover:text-white' style={({ isActive }) => {
+                return {
+                  color: isActive ? "white" : '',
+                  background: 'none'
+                }
+              }} to="/dashboard/reservation">
                 {" "}
                 <FaCalendar></FaCalendar> Reservation{" "}
               </NavLink>{" "}
             </li>
             <li>
               {" "}
-              <NavLink to="/dashboard/paymentHistory">
+              <NavLink className='hover:text-white' style={({ isActive }) => {
+                return {
+                  color: isActive ? "white" : '',
+                  background: 'none'
+                }
+              }} to="/dashboard/paymentHistory">
                 {" "}
                 <FaWallet></FaWallet> Payment History{" "}
               </NavLink>{" "}
             </li>
             <li>
               {" "}
-              <NavLink to="/dashboard/cart">
+              <NavLink className='hover:text-white' style={({ isActive }) => {
+                return {
+                  color: isActive ? "white" : '',
+                  background: 'none'
+                }
+              }} to="/dashboard/cart">
                 {" "}
                 <FaCartShopping></FaCartShopping> {`My Cart (${cart?.length})`}  {" "}
               </NavLink>{" "}
             </li>
             <li>
               {" "}
-              <NavLink to="/dashboard/review">
+              <NavLink className='hover:text-white' style={({ isActive }) => {
+                return {
+                  color: isActive ? "white" : '',
+                  background: 'none'
+                }
+              }} to="/dashboard/addReview">
                 {" "}
                 <FaAd></FaAd> Add Review{" "}
               </NavLink>{" "}
             </li>
             <li>
               {" "}
-              <NavLink to="/dashboard/booking">
+              <NavLink className='hover:text-white' style={({ isActive }) => {
+                return {
+                  color: isActive ? "white" : '',
+                  background: 'none'
+                }
+              }} to="/dashboard/userBooking">
                 {" "}
-                <FaCalendarAlt></FaCalendarAlt> Add Review{" "}
+                <FaCalendarAlt></FaCalendarAlt>My Booking{" "}
               </NavLink>{" "}
             </li>
-          </>
+          </div>
         )}
 
         <div className="divider before:bg-black after:bg-black "></div>
         <li>
           {" "}
-          <NavLink to="/">
+          <NavLink className='hover:text-white' style={({ isActive }) => {
+            return {
+              color: isActive ? "white" : '',
+              background: 'none'
+            }
+          }} to="/">
             {" "}
             <FaHome></FaHome> Home{" "}
           </NavLink>{" "}
         </li>
         <li>
           {" "}
-          <NavLink to="/shop/salad">
+          <NavLink className='hover:text-white' style={({ isActive }) => {
+            return {
+              color: isActive ? "white" : '',
+              background: 'none'
+            }
+          }} to="/shop/salad">
             {" "}
             <FaShoppingBag></FaShoppingBag> Shop{" "}
           </NavLink>{" "}
         </li>
         <li>
           {" "}
-          <NavLink to="/contact">
+          <NavLink className='hover:text-white' style={({ isActive }) => {
+            return {
+              color: isActive ? "white" : '',
+              background: 'none'
+            }
+          }} to="/contact">
             {" "}
             <FaEnvelope></FaEnvelope> Contact{" "}
           </NavLink>{" "}
         </li>
       </div>
-      <div className="bg-gray-100 w-full px-10  text-black">
+      <div className="bg-base-100 w-full px-4  text-black">
         <Outlet></Outlet>
       </div>
     </div>

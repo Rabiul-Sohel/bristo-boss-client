@@ -20,7 +20,7 @@ const FoodCard = ({ item }) => {
       // ToDO: do something
       console.log(food);
       const cartItem = {
-        cartId: _id,
+        menuId: _id,
         customer: user.email,
         name, 
         image,

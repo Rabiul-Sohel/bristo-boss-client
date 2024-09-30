@@ -4,11 +4,13 @@ import NavBar from "../Pages/Shared/NavBar/NavBar";
 
 const MainLayout = () => {
   const location = useLocation()
-  const navFooterOff = location.pathname === '/login' || location.pathname.includes('signUp') ||location.pathname.includes('form') || location.pathname.includes('file')
+  const navFooterOff = location.pathname === '/login' || location.pathname.includes('signUp') || location.pathname.includes('form') || location.pathname.includes('file')
   // console.log(navFooterOff);
   return (
     <div>
-      {navFooterOff || <NavBar></NavBar>}
+      <div className="sticky z-50">
+        {navFooterOff || <NavBar></NavBar>}
+      </div>
       <Outlet></Outlet>
       {navFooterOff || <Footer></Footer>}
     </div>

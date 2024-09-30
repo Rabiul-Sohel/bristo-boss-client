@@ -14,14 +14,14 @@ const CheckoutForm4 = ({ clientSecret, totalPrice }) => {
     const axiosSecure = useAxiosSecure()
     const [cart, refetch] = useCart()
     const navigate = useNavigate()
-    
+    const card = elements.getElement(CardNumberElement)
     //    const [clientSecret, setClientSecret] = useState(null)
     const handlePaymentSubit = async (e) => {
         e.preventDefault()
         if (!stripe || !elements) {
             return
         }
-        const card = elements.getElement(CardNumberElement)
+        
         const { error, paymentIntent } = await stripe.confirmCardPayment(clientSecret, {
             payment_method: {
                 card,
@@ -37,13 +37,14 @@ const CheckoutForm4 = ({ clientSecret, totalPrice }) => {
                 email: user?.email,
                 products: cart.length,
                 price: totalPrice,
-                ids: cart.map(singleCart => singleCart._id) ,
-                cartIds: cart.map(singleProduct => singleProduct.cartId)  ,
+                cartIds: cart.map(singleCart => singleCart._id) ,
+                menuIds: cart.map(singleProduct => singleProduct.menuId)  ,
                 transactionId: paymentIntent.id  ,
-                status: 'Pending'
+                paymentStatus: 'Success',
+                deliveryStatus: 'Pending'
 
              }
-             console.log(payment);
+            //  console.log(payment);
              axiosSecure.post('/payments', payment)
              .then(res => {
                 console.log(res.data);
@@ -55,7 +56,7 @@ const CheckoutForm4 = ({ clientSecret, totalPrice }) => {
                     timer: 1500
                   });
                   
-                  navigate('/dashboard/paymentSuccess')
+                  navigate('/dashboard/success?message=success')
                   refetch()
 
              })
@@ -87,7 +88,7 @@ const CheckoutForm4 = ({ clientSecret, totalPrice }) => {
 
             </div>
 
-            <button className='px-36 py-2 my-6 rounded-md hover:bg-[#4509c5] bg-[#570DF8] text-white' disabled={!stripe}>Pay</button>
+            <button disabled={!stripe || !elements || !card} className='px-36 py-2 my-6 rounded-md hover:bg-[#4509c5] bg-[#570DF8] text-white' >Pay</button>
         </form>
     );
 };

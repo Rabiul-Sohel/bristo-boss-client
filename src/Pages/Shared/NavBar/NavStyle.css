@@ -1,0 +1,9 @@
+
+
+.nav-link:hover{
+    color: #EEFF25;
+    background: none;
+}
+.logo{
+    clip-path: polygon(0 0, 100% 0, 85% 100%, 0 100%);
+}

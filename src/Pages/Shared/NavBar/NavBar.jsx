@@ -4,6 +4,8 @@ import Swal from "sweetalert2";
 import { FaShoppingCart } from "react-icons/fa";
 import useCart from "../../../hooks/useCart";
 import useAdmin from "../../../hooks/useAdmin";
+import '../NavBar/NavStyle.css'
+import logo from '../../../assets/logo.png'
 
 const NavBar = () => {
   const { user, signOutUser } = useAuth();
@@ -26,13 +28,41 @@ const NavBar = () => {
   const navOptions = (
     <>
       <li>
-        <NavLink to="/">Home</NavLink>
+        <NavLink className='nav-link' style={({ isPending, isActive }) => {
+          return {
+            color: isActive ? '#EEFF25' : '',
+            background: 'none'
+
+          }
+        }} to="/">Home</NavLink>
       </li>
       <li>
-        <NavLink to="/menu">Our Menu</NavLink>
+        <NavLink className='nav-link' style={({ isPending, isActive }) => {
+          return {
+            color: isActive ? '#EEFF25' : '',
+            background: 'none'
+
+          }
+        }} to="/contact">Contact Us</NavLink>
       </li>
       <li>
-        <NavLink to="/shop/salad">Our Shop</NavLink>
+        <NavLink className='nav-link' style={({ isPending, isActive }) => {
+          return {
+            color: isActive ? '#EEFF25' : '',
+            background: 'none'
+
+          }
+        }} to="/menu">Our Menu</NavLink>
+      </li>
+      <li>
+        <NavLink className='nav-link' style={({ isPending, isActive }) => {
+          return {
+            color: isActive ? '#EEFF25' : '',
+            background: 'none'
+
+          }
+        }}
+          to="/shop/salad">Our Shop</NavLink>
       </li>
       {
         // user ? 'true' : 'false'
@@ -40,32 +70,47 @@ const NavBar = () => {
       }
       {
         user && isAdmin?.admin && <li>
-          <NavLink to="/adminSecret">Admin Secret</NavLink>
-        </li>
-      }
-      {
-          user && !isAdmin?.admin && <li>
-          <NavLink to="/userSecret">User Secret</NavLink>
+          <NavLink className='nav-link' style={({ isPending, isActive }) => {
+            return {
+              color: isActive ? '#EEFF25' : '',
+              background: 'none'
+
+            }
+          }} to="dashboard/adminHome">Admin Dashboard</NavLink>
         </li>
       }
 
-      <li>
-        <NavLink to='/dashboard/cart' className="btn">
-          <FaShoppingCart />
-          <div className="badge badge-secondary">
-            {
-              cart ? cart?.length : 0
+      {
+        user && !isAdmin?.admin && <li>
+          <NavLink className='nav-link' style={({ isPending, isActive }) => {
+            return {
+              color: isActive ? '#EEFF25' : '',
+              background: 'none'
+
             }
-          </div>
-        </NavLink>
-      </li>
+          }} to="dashboard/userHome">User Dashboard</NavLink>
+        </li>
+      }
+
+      {
+        user && !isAdmin?.admin && <li>
+          <NavLink to='/dashboard/cart' className=" bg-green-600 relative rounded-full w-10 h-10">
+            <FaShoppingCart className="text-xl -ml-2 " />
+            <div className=" bg-red-600 py-1 px-3 mix-blend-overlay  rounded-full  absolute top-6 -right-2  ">
+              {
+                cart ? cart?.length : 0
+              }
+            </div>
+          </NavLink>
+        </li>
+      }
 
     </>
   );
   return (
-    <div className="">
-      <div className="navbar bg-black bg-opacity-30 fixed z-10 text-white">
-        <div className="navbar-start">
+   
+      <div className="navbar text-white bg-black bg-opacity-70  flex items-start justify-between fixed z-30">
+        <div className="navbar-start  ">
           <div className="dropdown">
             <div tabIndex={0} role="button" className="btn btn-ghost lg:hidden">
               <svg
@@ -85,57 +130,62 @@ const NavBar = () => {
             </div>
             <ul
               tabIndex={0}
-              className="menu menu-sm dropdown-content mt-3 z-[1] p-2 shadow bg-base-100 rounded-box w-52"
+              className="menu uppercase menu-sm bg-black mix-blend-overlay dropdown-content mt-3 z-[1] p-2 shadow rounded-box w-52"
             >
               {navOptions}
             </ul>
           </div>
-          <a className="btn btn-ghost text-xl">Bistro Boss</a>
+          <div className="absolute top-0 flex items-center justify-center  h-[100px] bg-white overflow-hidden  w-[350px] text-black left-0 logo rounded-none btn btn-ghost pr-10">
+            <img className="w-16 mb-7  " src={logo} alt="" />
+            <a className=" -ml-2 font-bold text-3xl uppercase">Bistro Boss</a>
+          </div>
         </div>
-        <div className="navbar-center hidden lg:flex">
-          <ul className="menu menu-horizontal px-1">{navOptions}</ul>
-        </div>
-        <div className="navbar-end">
-          {user ? (
-            <div className="dropdown dropdown-end">
-              <div
-                tabIndex={0}
-                role="button"
-                className="btn btn-ghost btn-circle avatar"
-              >
-                <div className="w-10 rounded-full">
-                  <img
-                    alt="Tailwind CSS Navbar component"
-                    src={
-                      user.photoURL ? user.photoURL : "https://img.daisyui.com/images/stock/photo-1534528741775-53994a69daeb.jpg"
-                    }
-                  />
+        <div className="flex justify-end w-full gap-3 relative">
+          <div className=" hidden lg:flex   ">
+            <ul className="menu menu-horizontal bg-transparent bg items-center px-1 uppercase">{navOptions}</ul>
+          </div>
+          <div className=" ">
+            {user ? (
+              <div className="dropdown dropdown-end">
+                <div
+                  tabIndex={0}
+                  role="button"
+                  className="btn btn-ghost btn-circle avatar"
+                >
+                  <div className="w-10 rounded-full">
+                    <img
+                      alt="Tailwind CSS Navbar component"
+                      src={
+                        user.photoURL ? user.photoURL : "https://img.daisyui.com/images/stock/photo-1534528741775-53994a69daeb.jpg"
+                      }
+                    />
+                  </div>
                 </div>
+                <ul
+                  tabIndex={0}
+                  className="mt-3 z-[1] p-2 shadow menu menu-sm dropdown-content text-black bg-base-100 rounded-box w-52"
+                >
+                  <li>
+                    <a className="justify-between">
+                      Profile
+                      <span className="badge">New</span>
+                    </a>
+                  </li>
+                  <li>
+                    <a>Settings</a>
+                  </li>
+                  <li>
+                    <button onClick={handleLogout}> Logout </button>
+                  </li>
+                </ul>
               </div>
-              <ul
-                tabIndex={0}
-                className="mt-3 z-[1] p-2 shadow menu menu-sm dropdown-content bg-base-100 rounded-box w-52"
-              >
-                <li>
-                  <a className="justify-between">
-                    Profile
-                    <span className="badge">New</span>
-                  </a>
-                </li>
-                <li>
-                  <a>Settings</a>
-                </li>
-                <li>
-                  <button onClick={handleLogout}> Logout </button>
-                </li>
-              </ul>
-            </div>
-          ) : (
-            <NavLink to="/login">Login</NavLink>
-          )}
+            ) : (
+              <NavLink to="/login">Login</NavLink>
+            )}
+          </div>
         </div>
       </div>
-    </div>
+    
   );
 };
 

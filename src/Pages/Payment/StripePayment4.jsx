@@ -7,12 +7,14 @@ import { useEffect, useState } from "react";
 
 const StripePayment4 = ({ amount }) => {
     const [clientSecret, setClientSecret] = useState('')
+    const newAmount = (amount / 100) * 100
+    console.log(newAmount);
    
     console.log(clientSecret, amount);
     const axiosSecure = useAxiosSecure()
 
     useEffect(() => {
-        axiosSecure.post('payment-intent', { amount })
+        axiosSecure.post('payment-intent',  {newAmount} )
             .then(res => {
                 setClientSecret(res.data.clientSecret);
             })

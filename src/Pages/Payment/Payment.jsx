@@ -1,12 +1,14 @@
 import { useState } from 'react';
 import creditImg from '../../assets/icon/credit-card 1.png'
 import sslImg from '../../assets/icon/icon-256x256.png'
+import bkashImg from '../../assets/BKash_Logo_icon.png'
 // import StripePayment3 from './stripePayment3';
 import { useLocation } from 'react-router-dom';
 import StripePayment2 from './StripePayment2';
 import StripePayment4 from './StripePayment4';
 import StripePayment3 from './StripePayment3';
 import PaymetButton from './SSLCommerz/PaymentButton';
+import BkashPayment from './BkashPayment';
 const Payment = ({  }) => {
     const [paymentMethod, setPaymentMethod] = useState(null)
     const location = useLocation()
@@ -28,6 +30,11 @@ const Payment = ({  }) => {
                         <img className='w-6' src={sslImg} alt="" />
                         <span>SSLCommerz</span>
                     </div>
+                    <div className='flex items-center gap-2'>
+                        <input onClick={(e)=>setPaymentMethod(e.target.value)} type="radio" name="paymentMethod" value='Bkash' />
+                        <img className='w-6' src={bkashImg} alt="" />
+                        <span>Bkash</span>
+                    </div>
                     
                 </div>
                 {
@@ -35,6 +42,9 @@ const Payment = ({  }) => {
                 }
                 {
                     paymentMethod === 'SSL Commerz' && <PaymetButton amount={amount}></PaymetButton>
+                }
+                {
+                    paymentMethod === 'Bkash' && <BkashPayment amount={amount}></BkashPayment>
                 }
             </div>
         </div>

@@ -21,7 +21,7 @@ const PhotoUpload = () => {
 
     try {
       // Replace the URL with your upload endpoint
-      const response = await fetch(`https://bristo-boss-server-ten.vercel.app/`, {
+      const response = await fetch(`http://localhost:5000/`, {
         method: 'POST',
         body: formData,
       });
